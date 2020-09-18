@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{{ location.name }}{% endblock %}
+
+{% block content %}
+    {% include 'BarOpenTable/navbar.html' %}
+    <div class="container-fluid">
+        <div class="row pt-4">
+            {% if location %}
+                <div class="col-12 px-5 ">
+                    <div class="card-columns seats">
+                        {% for seat in seats %}
+                            {% if seat.is_free %}
+                                <div class="card bg-success mb-4">
+                                    <h4 class="card-header bg-light">Table: {{ seat.name }}</h4>
+                                    <div class="card-body">
+                                        <div class="row justify-content-around">
+                                            <div class="col-3">
+                                                <h6>({{ seat.capacity }})</h6>
+                                            </div>
+                                            {% if location.is_open %}
+                                                <div class="col-4">
+                                                    {% include 'BarOpenTable/assign.html' %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="card bg-danger mb-4">
+                                    <h4 class="card-header bg-light">Table: {{ seat.name }}</h4>
+                                    <div class="card-body">
+                                        <div class="row justify-content-around">
+                                            <div class="col-10">
+                                                <form method="post" action="{% url 'bar_seating' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" id="loc_out" name="loc_out" value="{{ location.name }}"/>
+                                                    <input type="hidden" id="tab_out" name="tab_out" value="{{ seat.name }}"/>
+                                                    <input type="hidden" id="cap_out" name="cap_out" value="{{ seat.capacity }}"/>
+                                                    <button type="submit" class="btn btn-success btn-block">Clean</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    No Locations Found!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

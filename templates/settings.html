@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        howdy {{ user.username }} ME {{ boldmessage }}!
+    {% else %}
+        hey there partner!
+    {% endif %}
+    <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}

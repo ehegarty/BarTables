@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
+    <a class ="btn btn-primary" href="{% url 'bar_seating' %}" role="button"><h4><i class="fas fa-home"></i> Bar Seating</h4></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+                {% if manager == True %}
+                    <a class="ml-auto mr-1 btn btn-primary" href="{% url 'customers' %}" role="button">
+                        <i class="fas fa-users"></i> Customers
+                    </a>
+                {% endif %}
+            </li>
+            <li class="nav-item active">
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#myModal"><i class="fas fa-sign-out-alt"></i>Logout
+                </button>
+                <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content shadow-lg">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Are you sure you want to Logout?</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <a class="ml-auto mr-1 btn btn-primary" href="{% url 'logout' %}"
+                                   role="button">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout
+                                </a>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

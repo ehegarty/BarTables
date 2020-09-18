@@ -1,0 +1,7 @@
+.card-columns{
+    column-count: 2;
+}
+
+.seats{
+    column-count: 6;
+}

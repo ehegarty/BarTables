@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Bar Seating{% endblock %}
+
+{% block content %}
+    {% include 'BarOpenTable/navbar.html' %}
+    <div class="container-fluid">
+        <div class="row pt-4">
+            {% if locations %}
+                <div class="col-12 px-5">
+                    <div class="card-columns">
+                        {% for loc in locations %}
+                            {% if loc.is_open %}
+                                <div class="card bg-success mb-4">
+                                    <h4 class="card-header bg-light">{{ loc.name }}</h4>
+                                    <div class="card-body text-center">
+                                        <div class="row justify-content-around">
+                                            {% if loc.free_seats == 0 %}
+                                                <div class="col-3">
+                                                    <a class="btn btn-danger btn-block disabled"
+                                                       href="{{ loc.slug }}/">The {{ loc.name }} is Full</a>
+                                                </div>
+                                            {% endif %}
+
+                                            <div class="col-3">
+                                                <h5>Occupied Tables: {{ loc.occupied_seats }}</h5>
+                                            </div>
+                                            <div class="col-3 border border-dark">
+                                                <h5>Free Tables: {{ loc.free_seats }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row justify-content-end">
+                                            <div class="col-4">
+                                                <a class="btn btn-primary btn-block" href="{{ loc.slug }}/">Go
+                                                    to {{ loc.name }}</a>
+                                            </div>
+                                            {% if manager == True %}
+                                                <div class="col-2">
+                                                    <form method="post" action="{% url 'bar_seating' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" id="flip" name="flip" value="{{ loc.name }}"/>
+                                                        <button type="submit" class="btn btn-danger btn-block">Close</button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="card bg-danger mb-4">
+                                    <h4 class="card-header bg-light">{{ loc.name }}</h4>
+                                    <div class="card-body text-center">
+                                        {% if loc.occupied_seats == 0 %}
+                                            <div class="row justify-content-around">
+                                                <div class="col-3">
+                                                    <h5>Area Closed</h5>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="row justify-content-around">
+                                                <div class="col-4">
+                                                    <h5>Occupied Tables: {{ loc.occupied_seats }}</h5>
+                                                </div>
+                                                <div class="col-3">
+                                                    <h5>Area Closed</h5>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        {% if manager == True %}
+                                            <div class="row justify-content-end">
+                                                <div class="col-4">
+                                                    <a class="btn btn-primary btn-block" href="{{ loc.slug }}/">Go
+                                                        to {{ loc.name }}</a>
+                                                </div>
+                                                <div class="col-2">
+                                                    <form method="post" action="{% url 'bar_seating' %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" id="flip" name="flip" value="{{ loc.name }}"/>
+                                                        <button type="submit" class="btn btn-success btn-block">Open</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="row justify-content-end">
+                                                <div class="col-4">
+                                                    {% if loc.occupied_seats == 0 %}
+                                                        <a class="btn btn-primary btn-block disabled"
+                                                           href="{{ loc.slug }}/">The {{ loc.name }} is closed</a>
+                                                    {% else %}
+                                                        <a class="btn btn-primary btn-block"
+                                                           href="{{ loc.slug }}/">The {{ loc.name }} is closed</a>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    No Locations Found!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
