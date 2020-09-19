@@ -1,0 +1,1 @@
+web: gunicorn BarTables.wsgi --log-file -
