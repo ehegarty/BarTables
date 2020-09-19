@@ -34,7 +34,7 @@
                                     <div class="card-body">
                                         <div class="row justify-content-around">
                                             <div class="col-10">
-                                                <form method="post" action="{% url 'bar_seating' %}">
+                                                <form method="post" action="{% url 'seating' %}">
                                                     {% csrf_token %}
                                                     <input type="hidden" id="loc_out" name="loc_out" value="{{ location.name }}"/>
                                                     <input type="hidden" id="tab_out" name="tab_out" value="{{ seat.name }}"/>

@@ -13,7 +13,7 @@ def index(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect(reverse('bar_seating'))
+                return redirect(reverse('seating'))
             else:
                 return HttpResponse("Account is disabled.")
         else:
@@ -37,20 +37,22 @@ def bar_seating(request):
             tab = request.POST['tab']
             guests = []
             for x in range(int(cap)):
-                temp_name = request.POST['username' + str(x + 1)]
+                temp_first = request.POST['firstname' + str(x + 1)]
+                temp_last = request.POST['lastname' + str(x + 1)]
                 temp_num = request.POST['usernum' + str(x + 1)]
                 if ('under' + str(x + 1)) in request.POST:
                     temp_18 = True
                 else:
                     temp_18 = False
-                temp = {'name': temp_name, 'num': temp_num, 'under': temp_18}
-                if temp['name']:
+                temp = {'first_name': temp_first, 'last_name': temp_last, 'num': temp_num, 'under': temp_18}
+                if temp['first_name']:
                     guests.append(temp)
             location = Location.objects.get(name=loc)
             seat = Seat.objects.get(name=tab)
             person = 1
             for guest in guests:
-                Customer.objects.get_or_create(name=guest['name'],
+                Customer.objects.get_or_create(first_name=guest['first_name'],
+                                               last_name=guest['last_name'],
                                                number=guest['num'],
                                                location=location,
                                                seat=seat,
@@ -63,7 +65,6 @@ def bar_seating(request):
         elif 'loc_out' in request.POST:
             loc = request.POST['loc_out']
             tab = request.POST['tab_out']
-            cap = request.POST['cap_out']
             location = Location.objects.get(name=loc)
             seat = Seat.objects.get(name=tab)
             seat.is_free = True
@@ -72,19 +73,11 @@ def bar_seating(request):
             guests = Customer.objects.filter(location=location, seat=seat).order_by('-time_in')
             if len(guests) > 0:
                 start = guests[0].person
-                print(guests)
-                print(guests[0].name)
-                print(guests[1].name)
-                print(guests[0].person)
-                print(guests[1].person)
                 for guest in guests:
-                    print(guest.name)
                     if guest.person == start:
-                        print("IN")
                         guest.person = -1
                         guest.save()
                     else:
-                        print("OUT")
                         break
                     start -= 1
             context_dict = build_areas_context(request)
@@ -155,7 +148,7 @@ def customers(request):
             context_dict = {'guests': guests}
             return render(request, 'customers.html', context=context_dict)
         else:
-            return redirect(reverse('bar_seating'))
+            return redirect(reverse('seating'))
     else:
         return redirect(reverse('index'))
 
@@ -169,7 +162,7 @@ def settings(request):
             context_dict = {'boldmessage': user_role}
             return render(request, 'settings.html', context=context_dict)
         else:
-            return redirect(reverse('bar_seating'))
+            return redirect(reverse('seating'))
     else:
         return redirect(reverse('index'))
 

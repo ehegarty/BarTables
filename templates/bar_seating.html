@@ -39,8 +39,8 @@
                                                     to {{ loc.name }}</a>
                                             </div>
                                             {% if manager == True %}
-                                                <div class="col-2">
-                                                    <form method="post" action="{% url 'bar_seating' %}">
+                                                <div class="col-3">
+                                                    <form method="post" action="{% url 'seating' %}">
                                                         {% csrf_token %}
                                                         <input type="hidden" id="flip" name="flip" value="{{ loc.name }}"/>
                                                         <button type="submit" class="btn btn-danger btn-block">Close</button>
@@ -79,7 +79,7 @@
                                                         to {{ loc.name }}</a>
                                                 </div>
                                                 <div class="col-2">
-                                                    <form method="post" action="{% url 'bar_seating' %}">
+                                                    <form method="post" action="{% url 'seating' %}">
                                                         {% csrf_token %}
                                                         <input type="hidden" id="flip" name="flip" value="{{ loc.name }}"/>
                                                         <button type="submit" class="btn btn-success btn-block">Open</button>

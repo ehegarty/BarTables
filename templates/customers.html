@@ -43,29 +43,42 @@
                 <table id="dtBasicExample" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th class="th-sm">Name
+                        <th class="th-sm text-center">First Name
                         </th>
-                        <th class="th-sm">Student/Mobile Number
+                        <th class="th-sm text-center">Last Name
                         </th>
-                        <th class="th-sm">Area
+                        <th class="th-sm text-center">Student/Mobile Number
                         </th>
-                        <th class="th-sm">Table
+                        <th class="th-sm text-center">Area
                         </th>
-                        <th class="th-sm">Time In
+                        <th class="th-sm text-center">Table
                         </th>
-                        <th class="th-sm">Time Out
+                        <th class="th-sm text-center">Date
+                        </th>
+                        <th class="th-sm text-center">Time In
+                        </th>
+                        <th class="th-sm text-center">Time Out
+                        </th>
+                        <th class="th-sm text-center">Under 18
                         </th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for guest in guests %}
                         <tr>
-                            <td>{{ guest.name }}</td>
+                            <td>{{ guest.first_name }}</td>
+                            <td>{{ guest.last_name }}</td>
                             <td>{{ guest.number }}</td>
-                            <td>{{ guest.location }}</td>
-                            <td>{{ guest.seat }}</td>
-                            <td>{{ guest.time_in|time:"H:i" }}</td>
-                            <td>{{ guest.time_out|time:"H:i" }}</td>
+                            <td class="text-center">{{ guest.location }}</td>
+                            <td class="text-center">{{ guest.seat }}</td>
+                            <td class="text-center">{{ guest.date }}</td>
+                            <td class="text-center">{{ guest.time_in|time:"H:i" }}</td>
+                            <td class="text-center">{{ guest.time_out|time:"H:i" }}</td>
+                            {% if guest.u18 %}
+                                <td class="text-center"><i class="fas fa-check"></i><p class="d-none">x</p></td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

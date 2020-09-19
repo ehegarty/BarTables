@@ -12,15 +12,21 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form class="user" method="post" action="{% url 'bar_seating' %}">
+                <form class="user" method="post" action="{% url 'seating' %}">
                     {% csrf_token %}
                     {% for p in seat.places %}
                         <h6><u>Person {{ forloop.counter }}</u></h6>
                         <div class="form-group">
-                            <label for="inputName{{ forloop.counter }}">{{ forloop.counter }}. Name:</label>
-                            <input type="text" id="inputName{{ forloop.counter }}"
+                            <label for="inputFName{{ forloop.counter }}">{{ forloop.counter }}. First Name:</label>
+                            <input type="text" id="inputFName{{ forloop.counter }}"
                                    class="form-control form-control-user"
-                                   name="username{{ forloop.counter }}" value="" placeholder="Name" autofocus>
+                                   name="firstname{{ forloop.counter }}" value="" placeholder="First Name" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLName{{ forloop.counter }}">{{ forloop.counter }}. Last Name:</label>
+                            <input type="text" id="inputLName{{ forloop.counter }}"
+                                   class="form-control form-control-user"
+                                   name="lastname{{ forloop.counter }}" value="" placeholder="Last Name" autofocus>
                         </div>
                         <div class="form-group">
                             <label for="inputNum{{ forloop.counter }}">{{ forloop.counter }}. Student/Mobile

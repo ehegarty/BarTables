@@ -20,10 +20,10 @@ from BarOpenTable import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('bar_seating/', views.bar_seating, name='bar_seating'),
+    path('seating/', views.bar_seating, name='seating'),
     path('customers/', views.customers, name='customers'),
     path('settings/', views.settings, name='settings'),
     path('logout/', views.user_logout, name='logout'),
-    path('bar_seating/<slug:location_slug>/', views.show_location, name='show_location'),
+    path('seating/<slug:location_slug>/', views.show_location, name='show_location'),
     path('admin/', admin.site.urls),
 ]

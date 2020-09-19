@@ -35,14 +35,16 @@ class Seat(models.Model):
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     number = models.CharField(max_length=50)
     location = models.ForeignKey(Location, on_delete=models.PROTECT, to_field="id")
     seat = models.ForeignKey(Seat, on_delete=models.PROTECT, to_field="id")
     time_in = models.TimeField(auto_now=False, auto_now_add=True)
     time_out = models.TimeField(auto_now=True, auto_now_add=False)
+    date = models.DateField(auto_now=False, auto_now_add=True)
     u18 = models.BooleanField(default=False)
     person = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.name + ", in: " + str(self.time_in) + ", out: " + str(self.time_out)
+        return self.first_name + " " + self.last_name + ", in: " + str(self.time_in) + ", out: " + str(self.time_out)
