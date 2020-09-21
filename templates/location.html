@@ -9,19 +9,19 @@
     <div class="container-fluid">
         <div class="row pt-4">
             {% if location %}
-                <div class="col-12 px-5 ">
+                <div class="col-md-12 px-5 ">
                     <div class="card-columns seats">
                         {% for seat in seats %}
                             {% if seat.is_free %}
                                 <div class="card bg-success mb-4">
                                     <h4 class="card-header bg-light">Table: {{ seat.name }}</h4>
                                     <div class="card-body">
-                                        <div class="row justify-content-around">
-                                            <div class="col-3">
+                                        <div class="row">
+                                            <div class="col-md-3">
                                                 <h6>({{ seat.capacity }})</h6>
                                             </div>
                                             {% if location.is_open %}
-                                                <div class="col-4">
+                                                <div class="col-md-4">
                                                     {% include 'BarOpenTable/assign.html' %}
                                                 </div>
                                             {% endif %}
@@ -33,7 +33,7 @@
                                     <h4 class="card-header bg-light">Table: {{ seat.name }}</h4>
                                     <div class="card-body">
                                         <div class="row justify-content-around">
-                                            <div class="col-10">
+                                            <div class="col-md-10">
                                                 <form method="post" action="{% url 'seating' %}">
                                                     {% csrf_token %}
                                                     <input type="hidden" id="loc_out" name="loc_out" value="{{ location.name }}"/>
