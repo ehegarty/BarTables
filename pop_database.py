@@ -56,12 +56,12 @@ def populate():
         {'name': '38', 'capacity': '2'},
         {'name': '39', 'capacity': '2'},
         {'name': '40', 'capacity': '2'},
-        {'name': '41', 'capacity': '2'}
+        {'name': '41', 'capacity': '2'},
+        {'name': '42', 'capacity': '2'},
+        {'name': '43', 'capacity': '2'},
     ]
 
     foyer_tables = [
-        {'name': '42', 'capacity': '2'},
-        {'name': '43', 'capacity': '2'},
         {'name': '44', 'capacity': '2'},
         {'name': '45', 'capacity': '2'},
         {'name': '46', 'capacity': '2'},
@@ -71,33 +71,25 @@ def populate():
     ]
 
     venue_tables = [
-        {'name': '50', 'capacity': '1'},
-        {'name': '51', 'capacity': '1'},
-        {'name': '52', 'capacity': '1'},
-        {'name': '53', 'capacity': '1'},
-        {'name': '54', 'capacity': '1'},
-        {'name': '55', 'capacity': '1'},
-        {'name': '56', 'capacity': '1'},
-        {'name': '57', 'capacity': '1'},
-        {'name': '58', 'capacity': '1'},
-        {'name': '59', 'capacity': '1'},
-        {'name': '60', 'capacity': '1'},
-        {'name': '61', 'capacity': '1'},
-        {'name': '62', 'capacity': '1'},
-        {'name': '63', 'capacity': '1'},
+        {'name': '50', 'capacity': '2'},
+        {'name': '51', 'capacity': '2'},
+        {'name': '52', 'capacity': '2'},
+        {'name': '53', 'capacity': '2'},
+        {'name': '54', 'capacity': '2'},
+        {'name': '55', 'capacity': '2'},
+        {'name': '56', 'capacity': '2'},
+        {'name': '57', 'capacity': '2'},
+        {'name': '58', 'capacity': '2'},
+        {'name': '59', 'capacity': '2'},
+        {'name': '60', 'capacity': '2'},
+        {'name': '61', 'capacity': '2'},
+        {'name': '62', 'capacity': '2'},
+        {'name': '63', 'capacity': '2'},
         {'name': '64', 'capacity': '2'},
         {'name': '65', 'capacity': '2'},
         {'name': '66', 'capacity': '2'},
         {'name': '67', 'capacity': '2'},
         {'name': '68', 'capacity': '2'},
-        {'name': '69', 'capacity': '2'},
-        {'name': '70', 'capacity': '2'},
-        {'name': '71', 'capacity': '2'},
-        {'name': '72', 'capacity': '2'},
-        {'name': '73', 'capacity': '2'},
-        {'name': '74', 'capacity': '2'},
-        {'name': '75', 'capacity': '2'},
-        {'name': '76', 'capacity': '2'}
     ]
 
     locs = {'Loft Area': {'seats': loft_tables},
